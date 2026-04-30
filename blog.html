@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Blog | Jacqueline Kariuki</title>
+  <meta name="description" content="Articles, updates, and notes from Jacqueline Kariuki.">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@400;600;700&family=Questrial&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    /* Blog-specific styles. Kept here so the blog can be reused on other sites
+       without forcing edits to main.css. */
+    .blog-page { padding: 80px 0 60px; }
+    .blog-page .blog-header { margin-bottom: 40px; }
+    .blog-page .blog-header h1 { font-weight: 700; }
+    .blog-page .blog-header p { color: var(--default-color, #555); }
+
+    .post-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+    .post-card .post-date {
+      font-size: 0.85rem;
+      color: #777;
+      margin-bottom: 8px;
+    }
+    .post-card h2 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+    .post-card h2 a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .post-card h2 a:hover { color: var(--accent-color, #0d6efd); }
+    .post-card .post-summary {
+      color: #555;
+      flex: 1;
+    }
+    .post-card .read-more {
+      margin-top: 16px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .post-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .blog-state {
+      padding: 40px 0;
+      text-align: center;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body class="blog-listing-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Jacqueline Kariuki</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="blog-page">
+      <div class="container">
+        <div class="blog-header text-center">
+          <h1>Blog</h1>
+          <p>Articles, updates, and notes.</p>
+        </div>
+
+        <div id="blog-state" class="blog-state">Loading posts…</div>
+        <div id="blog-list" class="row g-4"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container text-center py-4">
+      <p>&copy; <span id="year"></span> Jacqueline Kariuki. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const list = document.getElementById('blog-list');
+    const state = document.getElementById('blog-state');
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatDate(value) {
+      if (!value) return '';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return value;
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function renderPosts(posts) {
+      if (!posts.length) {
+        state.textContent = 'No posts yet. Check back soon.';
+        return;
+      }
+      state.style.display = 'none';
+      list.innerHTML = posts.map((p) => `
+        <div class="col-md-6 col-lg-4">
+          <article class="post-card">
+            ${p.thumbnail ? `<img class="post-thumb" src="${escapeHtml(p.thumbnail)}" alt="">` : ''}
+            <div class="post-date">${escapeHtml(formatDate(p.date))}</div>
+            <h2><a href="post.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a></h2>
+            <p class="post-summary">${escapeHtml(p.summary || '')}</p>
+            <a class="read-more" href="post.html?slug=${encodeURIComponent(p.slug)}">Read more →</a>
+          </article>
+        </div>
+      `).join('');
+    }
+
+    fetch('/api/posts')
+      .then((res) => {
+        if (!res.ok) throw new Error('Request failed');
+        return res.json();
+      })
+      .then(renderPosts)
+      .catch(() => {
+        state.textContent = 'Could not load posts. Please try again later.';
+      });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Post | Jacqueline Kariuki</title>
+  <meta id="meta-description" name="description" content="">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@400;600;700&family=Questrial&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .post-page { padding: 80px 0 60px; }
+    .post-article {
+      max-width: 760px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+    }
+    .post-article .post-meta {
+      color: #777;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    .post-article h1 {
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+    .post-article .post-thumb {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .post-article .post-body {
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .post-article .post-body img { max-width: 100%; border-radius: 8px; }
+    .post-article .post-body h2 { margin-top: 1.6em; }
+    .post-article .post-body h3 { margin-top: 1.4em; }
+    .post-article .post-body pre {
+      background: #f5f5f5;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    .post-article .post-body code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .post-article .post-body pre code {
+      background: transparent;
+      padding: 0;
+    }
+    .post-article .post-body blockquote {
+      border-left: 4px solid #ddd;
+      margin: 1.2em 0;
+      padding: 4px 16px;
+      color: #555;
+    }
+    .post-back {
+      display: inline-block;
+      margin-bottom: 24px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .post-state { text-align: center; padding: 60px 0; color: #666; }
+  </style>
+</head>
+
+<body class="blog-post-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Jacqueline Kariuki</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="post-page">
+      <div class="container">
+        <a class="post-back" href="blog.html">← Back to all posts</a>
+        <div id="post-state" class="post-state">Loading post…</div>
+        <article id="post-article" class="post-article" hidden>
+          <img id="post-thumb" class="post-thumb" alt="" hidden>
+          <div class="post-meta" id="post-date"></div>
+          <h1 id="post-title"></h1>
+          <div class="post-body" id="post-body"></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container text-center py-4">
+      <p>&copy; <span id="year"></span> Jacqueline Kariuki. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Marked.js: a small library that converts Markdown text into HTML in the browser. -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+
+    const state = document.getElementById('post-state');
+    const article = document.getElementById('post-article');
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatDate(value) {
+      if (!value) return '';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return value;
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // Strip a YAML frontmatter block from the top of a Markdown file and return
+    // the metadata as an object plus the remaining Markdown body.
+    function parseFrontmatter(raw) {
+      const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+      if (!match) return { meta: {}, body: raw };
+      const meta = {};
+      for (const line of match[1].split(/\r?\n/)) {
+        const m = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+        if (!m) continue;
+        let value = m[2].trim();
+        if ((value.startsWith('"') && value.endsWith('"')) ||
+            (value.startsWith("'") && value.endsWith("'"))) {
+          value = value.slice(1, -1);
+        }
+        meta[m[1]] = value;
+      }
+      return { meta, body: match[2] };
+    }
+
+    function showError(message) {
+      state.textContent = message;
+    }
+
+    if (!/^[A-Za-z0-9_-]+$/.test(slug || '')) {
+      showError('Post not found.');
+    } else {
+      fetch(`/blog/${encodeURIComponent(slug)}.md`)
+        .then((res) => {
+          if (!res.ok) throw new Error('Not found');
+          return res.text();
+        })
+        .then((raw) => {
+          const { meta, body } = parseFrontmatter(raw);
+
+          document.title = `${meta.title || slug} | Jacqueline Kariuki`;
+          if (meta.summary) {
+            document.getElementById('meta-description').setAttribute('content', meta.summary);
+          }
+
+          document.getElementById('post-title').textContent = meta.title || slug;
+          document.getElementById('post-date').textContent = formatDate(meta.date);
+
+          if (meta.thumbnail) {
+            const thumb = document.getElementById('post-thumb');
+            thumb.src = meta.thumbnail;
+            thumb.hidden = false;
+          }
+
+          // marked.parse converts Markdown to HTML. Output is rendered into the
+          // page directly because content authors are trusted (CMS-only writes).
+          document.getElementById('post-body').innerHTML = marked.parse(body);
+
+          state.hidden = true;
+          article.hidden = false;
+        })
+        .catch(() => showError('Post not found.'));
+    }
+  </script>
+
+</body>
+
+</html>
