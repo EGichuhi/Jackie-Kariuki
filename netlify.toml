@@ -1,0 +1,4 @@
+# Bundle the blog markdown files alongside the function so it can read them
+# at request time. Without this, /api/posts would not see the .md files.
+[functions."list-posts"]
+  included_files = ["blog/**"]

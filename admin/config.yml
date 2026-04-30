@@ -1,18 +1,42 @@
 backend:
-  name: github
-  repo: EGichuhi/Jackie-Kariuki
+  name: git-gateway
   branch: main
 
+# Where uploaded images live in the repo, and the URL prefix used in posts.
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
+
+# Friendly site links shown inside the CMS UI.
+site_url: https://jackiekariuki.netlify.app
+display_url: https://jackiekariuki.netlify.app
+logo_url: https://jackiekariuki.netlify.app/assets/img/favicon.png
+
+# Generate clean, ASCII-only, hyphenated slugs for filenames.
+slug:
+  encoding: "ascii"
+  clean_accents: true
+  sanitize_replacement: "-"
 
 collections:
   - name: "blog"
     label: "Blog Posts"
+    label_singular: "Blog Post"
+    description: "Articles published on the website."
     folder: "blog"
     create: true
+    delete: true
     slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    summary: "{{title}} — {{date | date('YYYY-MM-DD')}}"
+    sortable_fields: ["date", "title"]
+    view_filters:
+      - label: "Posts in 2026"
+        field: date
+        pattern: "2026"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Summary", name: "summary", widget: "text", required: false, hint: "Short description shown on the blog listing page." }
+      - { label: "Featured Image", name: "thumbnail", widget: "image", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
