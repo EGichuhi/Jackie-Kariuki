@@ -1,0 +1,78 @@
+name: Rebuild posts.json
+
+on:
+  push:
+    paths:
+      - "blog/**.md"
+  workflow_dispatch:
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate posts.json from Markdown frontmatter
+        run: |
+          python3 - <<'PYEOF'
+          import os, json, re
+          from datetime import datetime
+
+          BLOG_DIR = "blog"
+          OUTPUT   = os.path.join(BLOG_DIR, "posts.json")
+
+          def parse_frontmatter(text):
+              match = re.match(r'^---\r?\n(.*?)\r?\n---\r?\n?(.*)', text, re.DOTALL)
+              if not match:
+                  return {}, text
+              meta = {}
+              for line in match.group(1).splitlines():
+                  m = re.match(r'^([A-Za-z0-9_-]+)\s*:\s*(.*)$', line)
+                  if not m:
+                      continue
+                  key, val = m.group(1), m.group(2).strip().strip('"\'')
+                  meta[key] = val
+              return meta, match.group(2)
+
+          posts = []
+          for fname in os.listdir(BLOG_DIR):
+              if not fname.endswith(".md"):
+                  continue
+              slug = fname[:-3]
+              with open(os.path.join(BLOG_DIR, fname), encoding="utf-8") as f:
+                  raw = f.read()
+              meta, _ = parse_frontmatter(raw)
+              posts.append({
+                  "slug":      slug,
+                  "title":     meta.get("title", slug),
+                  "date":      meta.get("date", ""),
+                  "summary":   meta.get("summary", ""),
+                  "thumbnail": meta.get("thumbnail", ""),
+              })
+
+          def sort_key(p):
+              try:
+                  return datetime.fromisoformat(p["date"])
+              except Exception:
+                  return datetime.min
+
+          posts.sort(key=sort_key, reverse=True)
+
+          with open(OUTPUT, "w", encoding="utf-8") as f:
+              json.dump(posts, f, indent=2, ensure_ascii=False)
+
+          print(f"Written {len(posts)} posts to {OUTPUT}")
+          PYEOF
+
+      - name: Commit updated posts.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add blog/posts.json
+          git diff --cached --quiet || git commit -m "chore: rebuild posts.json [skip ci]"
+          git push
+          
