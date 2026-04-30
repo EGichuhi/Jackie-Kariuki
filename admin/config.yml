@@ -1,0 +1,22 @@
+backend:
+  name: github
+  repo: EGichuhi/Jackie-Kariuki
+  branch: main
+  base_url: https://sveltia-cms-auth.pages.dev
+
+media_folder: assets/img/blog
+public_folder: /assets/img/blog
+
+collections:
+  - name: blog
+    label: Blog Posts
+    label_singular: Blog Post
+    folder: blog
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Publish Date, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false }
+      - { label: Summary, name: summary, widget: text }
+      - { label: Thumbnail, name: thumbnail, widget: image, required: false }
+      - { label: Body, name: body, widget: markdown }
