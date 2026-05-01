@@ -3,6 +3,8 @@ backend:
   repo: EGichuhi/Jackie-Kariuki
   branch: main
   base_url: https://api.netlify.com
+  auth_endpoint: auth
+  app_id: Ov23lii2yHC6jCYd1Zum
 
 media_folder: assets/img/blog
 public_folder: /assets/img/blog
