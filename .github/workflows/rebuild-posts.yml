@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Generate posts.json from Markdown frontmatter
+      - - name: Generate posts.json from Markdown frontmatter
         run: |
           python3 - <<'PYEOF'
           import os, json, re
@@ -47,13 +47,14 @@ jobs:
               slug = fname[:-3]
               with open(os.path.join(BLOG_DIR, fname), encoding="utf-8") as f:
                   raw = f.read()
-              meta, _ = parse_frontmatter(raw)
+              meta, body = parse_frontmatter(raw)
               posts.append({
                   "slug":      slug,
                   "title":     meta.get("title", slug),
                   "date":      meta.get("date", ""),
                   "summary":   meta.get("summary", ""),
                   "thumbnail": meta.get("thumbnail", ""),
+                  "body":      body,
               })
 
           def sort_key(p):
