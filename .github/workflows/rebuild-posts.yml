@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - - name: Generate posts.json from Markdown frontmatter
+      - name: Generate posts.json from Markdown frontmatter
         run: |
           python3 - <<'PYEOF'
           import os, json, re
