@@ -5,6 +5,7 @@ backend:
   auth_type: pkce
   app_id: Ov23lii2yHC6jCYd1Zum
 
+
 media_folder: assets/img/blog
 public_folder: /assets/img/blog
 
