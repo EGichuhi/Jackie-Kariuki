@@ -954,8 +954,7 @@
       });
       document.getElementById('form-loading').style.display = 'none';
       if (response.ok) {
-        document.getElementById('form-success').style.display = 'block';
-        form.reset();
+        window.location.href = '/thank-you.html';
       } else {
         document.getElementById('form-error').style.display = 'block';
       }
