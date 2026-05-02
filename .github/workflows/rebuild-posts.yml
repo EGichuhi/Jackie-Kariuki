@@ -3,7 +3,7 @@ name: Rebuild posts.json
 on:
   push:
     paths:
-      - "blog/hello-world.md"
+      - "blog/**.md"
   workflow_dispatch:
 
 jobs:
