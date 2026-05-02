@@ -2,8 +2,7 @@ backend:
   name: github
   repo: EGichuhi/Jackie-Kariuki
   branch: main
-  auth_type: pkce
-  app_id: Ov23lii2yHC6jCYd1Zum
+  base_url: https://sveltia-cms-auth.eunice-gwanja.workers.dev
 
 media_folder: assets/img/blog
 public_folder: /assets/img/blog
