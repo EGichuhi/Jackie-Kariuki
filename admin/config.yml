@@ -2,8 +2,7 @@ backend:
   name: github
   repo: EGichuhi/Jackie-Kariuki
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  auth_type: pkce
   app_id: Ov23lii2yHC6jCYd1Zum
 
 media_folder: assets/img/blog
