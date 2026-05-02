@@ -34,6 +34,20 @@
       font-size: 1.1rem;
       margin-bottom: 32px;
     }
+    .btn-submit {
+      background-color: var(--accent-color);
+      color: var(--contrast-color);
+      padding: 0.75rem 2rem;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .btn-submit:hover {
+      background-color: color-mix(in srgb, var(--accent-color), transparent 15%);
+      color: var(--contrast-color);
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body>
@@ -62,7 +76,7 @@
         <div class="icon"><i class="bi bi-check-circle-fill"></i></div>
         <h1>Thank You!</h1>
         <p>Your message has been received. Jacqueline will get back to you as soon as possible.</p>
-        <a href="index.html" class="btn btn-primary px-5 py-3">Back to Home</a>
+        <a href="index.html" class="btn btn-submit px-5 py-3">Back to Home</a>
       </div>
     </section>
   </main>
