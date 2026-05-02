@@ -16,3 +16,5 @@ A heartfelt thank you to everyone who attended, contributed, and helped make the
 As you look through the photos, we hope you can feel the joy and connection that made this day so meaningful.
 
 Together, we continue to rise. 💛
+
+![](/assets/img/blog/WhatsApp%20Image%202026-04-24%20at%2021.46.50.jpeg "Event Poster")
