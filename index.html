@@ -858,9 +858,6 @@
         <div class="contact-form card" data-aos="fade-up" data-aos-delay="300">
           <div class="card-body p-4 p-lg-5">
             <form id="contact-form" class="php-email-form">
-              <input type="hidden" name="access_key" value="1a42371f-331d-4e08-a057-6c7895b43cb7">
-              <input type="hidden" name="to" value="eunice.gwanja@gmail.com">
-              <input type="hidden" name="subject" value="New Contact from Jackie's Website">
               <div class="row gy-4">
                 <div class="col-12">
                   <input type="text" name="name" class="form-control" placeholder="Your Name" required>
@@ -914,7 +911,6 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -934,23 +930,37 @@
     document.getElementById('form-error').style.display = 'none';
     document.querySelector('#contact-form button[type="submit"]').disabled = true;
 
-    const data = new FormData(form);
+    const data = {
+      name: form.querySelector('input[name="name"]').value,
+      email: form.querySelector('input[name="email"]').value,
+      subject: form.querySelector('input[name="subject"]').value,
+      message: form.querySelector('textarea[name="message"]').value,
+      timestamp: new Date().toISOString()
+    };
+
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://hook.us2.make.com/4wpsj8hoxd876nrzu52gsdcuyueuhh2x', {
         method: 'POST',
-        body: data
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
       });
+      
       document.getElementById('form-loading').style.display = 'none';
       if (response.ok) {
+        form.reset();
         window.location.href = '/thank-you.html';
       } else {
         document.getElementById('form-error').style.display = 'block';
+        document.querySelector('#contact-form button[type="submit"]').disabled = false;
       }
     } catch(err) {
+      console.error('Error:', err);
       document.getElementById('form-loading').style.display = 'none';
       document.getElementById('form-error').style.display = 'block';
+      document.querySelector('#contact-form button[type="submit"]').disabled = false;
     }
-    document.querySelector('#contact-form button[type="submit"]').disabled = false;
   });
 </script>
 
