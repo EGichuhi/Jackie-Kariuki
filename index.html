@@ -5,29 +5,29 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Jacqueline Kariuki | Community Leadership & Strategic Guidance</title>
-
   <meta name="description" content="Jacqueline Kariuki supports individuals and organizations with immigration guidance, mentorship, and community leadership in Canada." />
   <meta name="keywords" content="leadership, mentorship, immigration support, community guidance, Canada, coaching" />
 
+  <link href="assets/img/favicon.png" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            ink: "#1b1b1f",
-            sand: "#f6f1ea",
-            blush: "#f7e6ef",
-            rose: "#d9a6b3",
-            gold: "#c8a07a"
+            ink: '#14141b',
+            rose: '#e0b0c9',
+            blush: '#f7e4f2',
+            cream: '#fbf3f8',
+            gold: '#c9977f'
           },
           boxShadow: {
-            soft: "0 20px 60px rgba(0,0,0,0.08)"
+            soft: '0 24px 80px rgba(20,20,27,0.12)'
           }
         }
       }
@@ -35,186 +35,605 @@
   </script>
 
   <style>
+    :root {
+      color-scheme: dark;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
-      background: #faf7f2;
-      color: #1b1b1f;
+      background: radial-gradient(circle at top left, rgba(233, 169, 191, 0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255, 235, 230, 0.22), transparent 28%),
+        #05050b;
+      color: #f8f8fb;
     }
 
-    .serif {
-      font-family: 'DM Serif Display', serif;
+    .gradient-border {
+      background: linear-gradient(135deg, rgba(224, 176, 201, 0.4), rgba(255, 245, 240, 0.15));
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
     }
 
-    .grain {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.04;
-      background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+    .hero-bg {
+      background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.16), transparent 12%),
+        radial-gradient(circle at 90% 15%, rgba(229, 166, 183, 0.16), transparent 14%),
+        linear-gradient(180deg, rgba(7, 7, 15, 0.96), rgba(14, 14, 30, 0.96));
     }
 
-    .fade-in {
+    .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: 0.8s ease;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
 
-    .fade-in.visible {
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .nav-backdrop {
+      backdrop-filter: blur(18px);
+      background: rgba(7, 7, 15, 0.82);
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, #f1c3d0, #d4a6cb, #b88fbf);
+      width: 0;
+      transition: width 0.15s ease-out;
+    }
+
+    .section-ring {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: radial-gradient(circle at top right, rgba(224, 176, 201, 0.28), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(255, 239, 230, 0.24), transparent 22%);
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -1.2rem;
+      left: 1rem;
+      font-size: 4rem;
+      color: rgba(255, 255, 255, 0.1);
+      font-family: serif;
+    }
+
+    .cta-pill {
+      background: linear-gradient(135deg, rgba(224, 176, 201, 0.18), rgba(248, 236, 243, 0.12));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-blob {
+      position: absolute;
+      top: -12%;
+      right: -18%;
+      width: 24rem;
+      height: 24rem;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(255, 218, 234, 0.24), transparent 55%);
+      filter: blur(18px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-ring {
+      position: absolute;
+      bottom: -6rem;
+      left: -6rem;
+      width: 18rem;
+      height: 18rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      filter: blur(2px);
+      pointer-events: none;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 2rem;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 65%);
+      pointer-events: none;
+    }
+
+    .pattern-grid {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.16;
+      pointer-events: none;
+    }
+
+    .overflow-hidden-x {
+      overflow-x: hidden;
     }
   </style>
 </head>
 
-<body>
+<body class="overflow-hidden-x">
+  <div class="progress-bar" id="progressBar"></div>
 
-<div class="grain"></div>
-
-<!-- NAV -->
-<header class="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur border-b border-black/5">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <div class="font-semibold tracking-wide">Jacqueline Kariuki</div>
-
-    <nav class="hidden md:flex gap-8 text-sm text-gray-600">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#work">Work</a>
-      <a href="#contact" class="font-semibold text-ink">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main class="pt-28">
-
-<!-- HERO -->
-<section class="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
-
-  <div class="fade-in">
-    <p class="text-sm uppercase tracking-[0.3em] text-rose-500">Community Leadership</p>
-
-    <h1 class="serif text-5xl leading-tight mt-4">
-      Helping people and organizations find clarity, direction, and confidence.
-    </h1>
-
-    <p class="mt-6 text-gray-600 leading-7">
-      Strategic guidance for immigration, leadership development, and community transformation across Canada.
-    </p>
-
-    <div class="mt-8 flex gap-4">
-      <a href="#contact" class="bg-ink text-white px-6 py-3 rounded-full text-sm shadow-soft">
-        Book a Call
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 nav-backdrop">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="index.html" class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.32em] text-rose-100">
+        <span class="block w-10 h-10 rounded-3xl bg-gradient-to-br from-rose/30 via-cream/20 to-gold/10 ring-1 ring-white/10"></span>
+        <span class="text-white">Jacqueline Kariuki</span>
       </a>
-      <a href="#services" class="border border-black/10 px-6 py-3 rounded-full text-sm">
-        Explore Services
-      </a>
+
+      <nav class="hidden items-center gap-8 text-sm text-slate-200 md:flex">
+        <a href="#hero" class="transition hover:text-white">Home</a>
+        <a href="#about" class="transition hover:text-white">About</a>
+        <a href="#services" class="transition hover:text-white">Services</a>
+        <a href="#portfolio" class="transition hover:text-white">Organizations</a>
+        <a href="blog.html" class="transition hover:text-white">Stories</a>
+        <a href="#contact" class="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Contact</a>
+      </nav>
+
+      <button id="mobileMenuButton" aria-label="Open menu" class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-3 text-white transition hover:bg-white/10 md:hidden">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
     </div>
-  </div>
 
-  <div class="fade-in">
-    <img src="assets/img/profile/profile-1.webp" class="rounded-3xl shadow-soft object-cover w-full h-[520px]" />
-  </div>
-
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="max-w-6xl mx-auto px-6 py-20 fade-in">
-  <p class="text-sm uppercase tracking-[0.3em] text-rose-500">About</p>
-
-  <h2 class="serif text-4xl mt-4">A bridge between people, systems, and opportunity.</h2>
-
-  <p class="mt-6 text-gray-600 leading-7 max-w-2xl">
-    Jacqueline Kariuki works at the intersection of leadership, immigration, and community development,
-    helping individuals and organizations navigate transition with clarity.
-  </p>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="bg-white py-24 border-y border-black/5">
-  <div class="max-w-6xl mx-auto px-6">
-
-    <p class="text-sm uppercase tracking-[0.3em] text-rose-500">Services</p>
-    <h2 class="serif text-4xl mt-4">Support designed for real-world transformation</h2>
-
-    <div class="grid md:grid-cols-3 gap-6 mt-12">
-
-      <div class="p-6 rounded-3xl bg-sand shadow-soft">
-        <h3 class="font-semibold">Leadership Development</h3>
-        <p class="text-sm text-gray-600 mt-3">Build clarity, confidence, and influence.</p>
+    <div id="mobileMenu" class="hidden border-t border-white/10 bg-slate-950/95 px-4 py-5 backdrop-blur-xl md:hidden">
+      <div class="space-y-3 text-sm text-slate-200">
+        <a href="#hero" class="block rounded-2xl px-3 py-2 transition hover:bg-white/5">Home</a>
+        <a href="#about" class="block rounded-2xl px-3 py-2 transition hover:bg-white/5">About</a>
+        <a href="#services" class="block rounded-2xl px-3 py-2 transition hover:bg-white/5">Services</a>
+        <a href="#portfolio" class="block rounded-2xl px-3 py-2 transition hover:bg-white/5">Organizations</a>
+        <a href="blog.html" class="block rounded-2xl px-3 py-2 transition hover:bg-white/5">Stories</a>
+        <a href="#contact" class="block rounded-2xl border border-white/15 bg-white/5 px-3 py-2 font-semibold text-white transition hover:bg-white/10">Contact</a>
       </div>
+    </div>
+  </header>
 
-      <div class="p-6 rounded-3xl bg-sand shadow-soft">
-        <h3 class="font-semibold">Immigration Guidance</h3>
-        <p class="text-sm text-gray-600 mt-3">Support navigating Canadian systems.</p>
+  <main class="relative pt-24">
+    <section id="hero" class="relative overflow-hidden hero-bg py-24 sm:py-28">
+      <div class="hero-blob"></div>
+      <div class="hero-ring"></div>
+      <div class="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-slate-950/90 to-transparent" aria-hidden="true"></div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <div class="space-y-6">
+            <span class="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.32em] text-rose-100">Community Leadership</span>
+            <h1 class="text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">A Leader Who Listens, A Builder Who Empowers.</h1>
+            <p class="max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">Transforming individuals and organizations through visionary leadership, strategic guidance, and supportive mentorship for life in Canada.</p>
+            <div class="flex flex-col gap-4 sm:flex-row">
+              <a href="#services" class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-rose to-gold px-8 py-3 text-sm font-semibold text-ink shadow-soft transition hover:scale-[1.01]">View My Services</a>
+              <a href="#contact" class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Let's Connect</a>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-3">
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-soft backdrop-blur-xl">
+                <span class="block text-3xl font-semibold text-white">500+</span>
+                <span class="mt-2 block text-sm uppercase tracking-[0.25em] text-slate-400">People Served</span>
+              </div>
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-soft backdrop-blur-xl">
+                <span class="block text-3xl font-semibold text-white">20+</span>
+                <span class="mt-2 block text-sm uppercase tracking-[0.25em] text-slate-400">Organizations</span>
+              </div>
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-center shadow-soft backdrop-blur-xl">
+                <span class="block text-3xl font-semibold text-white">3+</span>
+                <span class="mt-2 block text-sm uppercase tracking-[0.25em] text-slate-400">Countries</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="hero-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/80 p-6 shadow-soft">
+              <div class="pattern-grid"></div>
+              <img src="assets/img/profile/profile-1.webp" alt="Jackie Kariuki portrait" class="relative mx-auto h-[420px] w-full max-w-lg rounded-[1.8rem] object-cover shadow-2xl" loading="lazy" />
+            </div>
+            <div class="absolute -bottom-8 left-6 hidden w-72 rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-soft backdrop-blur-xl sm:block">
+              <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Partner with a trusted guide</p>
+              <h2 class="mt-3 text-xl font-semibold text-white">Empathy-led leadership, modern community impact.</h2>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="p-6 rounded-3xl bg-sand shadow-soft">
-        <h3 class="font-semibold">Mentorship</h3>
-        <p class="text-sm text-gray-600 mt-3">Personalized guidance for growth.</p>
+    <section id="about" class="relative py-24 sm:py-28">
+      <div class="section-ring"></div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div class="space-y-6 reveal">
+            <p class="text-sm uppercase tracking-[0.4em] text-rose-200">About</p>
+            <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Visionary & Community Leader</h2>
+            <p class="max-w-2xl text-base leading-8 text-slate-300">A bridge-builder who transforms challenges into opportunities through mentorship, advocacy, and strategic guidance.</p>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-3xl gradient-border p-6">
+                <h3 class="text-sm uppercase tracking-[0.25em] text-rose-200">Personal Insight</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-300">I blend time-tested wisdom with contemporary leadership practices to create sustainable outcomes.</p>
+              </div>
+              <div class="rounded-3xl gradient-border p-6">
+                <h3 class="text-sm uppercase tracking-[0.25em] text-rose-200">Approach</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-300">Empathy, clarity, and strategic focus guide my work with individuals and teams.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-6 md:grid-cols-2 reveal">
+            <div class="rounded-[2rem] bg-slate-950/80 p-6 shadow-soft border border-white/10">
+              <p class="text-sm uppercase tracking-[0.25em] text-rose-200">My experience</p>
+              <p class="mt-4 text-base leading-7 text-slate-300">With years of experience helping individuals and families thrive in Canada, I understand the challenges you face and offer compassionate guidance every step of the way.</p>
+            </div>
+            <div class="rounded-[2rem] bg-slate-950/80 p-6 shadow-soft border border-white/10">
+              <p class="text-sm uppercase tracking-[0.25em] text-rose-200">My promise</p>
+              <p class="mt-4 text-base leading-7 text-slate-300">Every journey is unique, so I take the time to understand your needs and build a personalized path toward your goals.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 grid gap-6 rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-soft lg:grid-cols-2">
+          <div class="space-y-3 reveal">
+            <p class="text-sm uppercase tracking-[0.25em] text-rose-200">Personal details</p>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <div class="rounded-3xl bg-white/5 p-5">
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Name</p>
+                <p class="mt-2 font-semibold text-white">Jacqueline Kariuki</p>
+              </div>
+              <div class="rounded-3xl bg-white/5 p-5">
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Email</p>
+                <p class="mt-2 font-semibold text-white">Jackiekariuki@gmail.com</p>
+              </div>
+              <div class="rounded-3xl bg-white/5 p-5">
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Phone</p>
+                <p class="mt-2 font-semibold text-white">+123 456 7890</p>
+              </div>
+              <div class="rounded-3xl bg-white/5 p-5">
+                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Nationality</p>
+                <p class="mt-2 font-semibold text-white">Kenyan-Canadian</p>
+              </div>
+            </div>
+          </div>
+          <div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-white/10 to-transparent p-8 ring-1 ring-white/10 backdrop-blur-xl reveal">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(229,166,183,0.24),_transparent_30%)]"></div>
+            <div class="relative space-y-4">
+              <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Signature</p>
+              <h3 class="text-2xl font-semibold text-white">Guidance rooted in purpose, compassion and real-world results.</h3>
+              <p class="text-sm leading-7 text-slate-300">I am passionate about empowering individuals and organizations to reach their full potential, building confidence and long-term success through meaningful support.</p>
+              <div class="flex items-center gap-4 pt-4">
+                <div class="h-16 w-16 rounded-3xl bg-gradient-to-br from-rose/20 to-cream/10"></div>
+                <div>
+                  <p class="text-base font-semibold text-white">Jackie Kariuki</p>
+                  <p class="text-sm text-slate-400">Community Leader</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section>
 
+    <section id="services" class="py-24 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Services</p>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Your journey, simplified—expert guidance at every step.</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">Whether you're navigating immigration, building a career, or leading in your community, I provide the tools, mentorship, and strategic support to turn your aspirations into reality.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-4">
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-soft transition duration-500 hover:-translate-y-1 hover:bg-white/5">
+            <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Leadership</p>
+            <h3 class="mt-4 text-xl font-semibold text-white">Leadership Development</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-300">Building bridges—connecting people to resources, networks, and opportunities.</p>
+            <div class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-rose-100 transition group-hover:text-white">
+              Learn more
+              <span aria-hidden="true">→</span>
+            </div>
+          </article>
+
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-soft transition duration-500 hover:-translate-y-1 hover:bg-white/5">
+            <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Strategy</p>
+            <h3 class="mt-4 text-xl font-semibold text-white">Strategic Planning</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-300">Personalized roadmaps for career growth, business success, and life in Canada.</p>
+            <div class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-rose-100 transition group-hover:text-white">
+              Learn more
+              <span aria-hidden="true">→</span>
+            </div>
+          </article>
+
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-soft transition duration-500 hover:-translate-y-1 hover:bg-white/5">
+            <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Mentorship</p>
+            <h3 class="mt-4 text-xl font-semibold text-white">Youth Mentorship</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-300">Empowering young leaders through coaching, skills training, and career-ready strategies.</p>
+            <div class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-rose-100 transition group-hover:text-white">
+              Learn more
+              <span aria-hidden="true">→</span>
+            </div>
+          </article>
+
+          <article class="group rounded-[2rem] border border-white/10 bg-slate-950/80 p-8 shadow-soft transition duration-500 hover:-translate-y-1 hover:bg-white/5">
+            <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Support</p>
+            <h3 class="mt-4 text-xl font-semibold text-white">Immigration Guidance</h3>
+            <p class="mt-4 text-sm leading-7 text-slate-300">Stress-free support for visas, PR, and citizenship—navigating Canada’s system with confidence.</p>
+            <div class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-rose-100 transition group-hover:text-white">
+              Learn more
+              <span aria-hidden="true">→</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="service-details.html" class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-8 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Explore all services</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="relative overflow-hidden py-24 sm:py-28 bg-white/3">
+      <div class="section-ring"></div>
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Organizations</p>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Proud partnerships grounded in impact and inclusion.</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">Supporting organizations that empower immigrants, youth and communities through leadership, access, and collaboration.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+            <img src="assets/img/portfolio/portfolio-1.webp" alt="Biashara Africa Business Club" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="p-6">
+              <p class="text-xs uppercase tracking-[0.35em] text-rose-200">Biashara Africa Business Club</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">Discover African Businesses Near You</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-300">Connecting African entrepreneurs with opportunities to grow within Toronto’s vibrant community.</p>
+              <a href="https://biasharaafricabusinessclub.org/" class="mt-6 inline-flex text-sm font-semibold text-rose-100 transition hover:text-white">Visit site →</a>
+            </div>
+          </article>
+
+          <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+            <img src="assets/img/portfolio/portfolio-10.webp" alt="KCO Kenyan Community Ontario" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="p-6">
+              <p class="text-xs uppercase tracking-[0.35em] text-rose-200">KCO</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">Kenyan Community in Ontario</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-300">Improving quality of life for community members through targeted programs and services.</p>
+              <a href="https://www.kcontario.com/" class="mt-6 inline-flex text-sm font-semibold text-rose-100 transition hover:text-white">Visit site →</a>
+            </div>
+          </article>
+
+          <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+            <img src="assets/img/portfolio/portfolio-7.webp" alt="Hannah Community" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="p-6">
+              <p class="text-xs uppercase tracking-[0.35em] text-rose-200">Hannah Community</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">Executive guidance for organizational change</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-300">Helping improve living standards with income-generating and holistic support initiatives.</p>
+              <a href="https://www.hannahcommunity.org/" class="mt-6 inline-flex text-sm font-semibold text-rose-100 transition hover:text-white">Visit site →</a>
+            </div>
+          </article>
+
+          <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+            <img src="assets/img/portfolio/portfolio-4.webp" alt="Accessibility For All" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="p-6">
+              <p class="text-xs uppercase tracking-[0.35em] text-rose-200">Accessibility For All</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">Inclusion, equality, accessibility</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-300">Building alliances to support persons with disabilities, women, youth, and seniors.</p>
+              <a href="https://accessibilityforall.org/" class="mt-6 inline-flex text-sm font-semibold text-rose-100 transition hover:text-white">Visit site →</a>
+            </div>
+          </article>
+
+          <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+            <img src="assets/img/portfolio/portfolio-2.webp" alt="Women Investing Together" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="p-6">
+              <p class="text-xs uppercase tracking-[0.35em] text-rose-200">Women Investing Together</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">Building financial confidence in community</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-300">Supporting women-led projects with meaningful financial and leadership guidance.</p>
+              <a href="" class="mt-6 inline-flex text-sm font-semibold text-rose-100 transition hover:text-white">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="group overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 shadow-soft transition hover:-translate-y-1 hover:shadow-xl">
+            <img src="assets/img/portfolio/portfolio-11.webp" alt="Women Of The Word" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="p-6">
+              <p class="text-xs uppercase tracking-[0.35em] text-rose-200">WOW</p>
+              <h3 class="mt-3 text-xl font-semibold text-white">Women Of The Word</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-300">Inspiring women to deepen their spiritual lives and lead with confidence.</p>
+              <a href="https://www.wowblessingstoronto.com/" class="mt-6 inline-flex text-sm font-semibold text-rose-100 transition hover:text-white">Visit site →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="py-24 sm:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Testimonials</p>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Stories from people who have grown with Jackie.</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-300">Trusted support with a human-first approach, bringing grace and clarity to transitions.</p>
+        </div>
+
+        <div class="mt-12 space-y-6 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-6">
+          <article class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 p-8 shadow-soft reveal testimonial-card">
+            <div class="relative z-10 space-y-4">
+              <p class="text-base leading-7 text-slate-300">"Jackie's guidance helped me navigate my first year in Canada with confidence. Her empathy and insight made every step feel manageable."</p>
+              <div class="mt-6">
+                <p class="font-semibold text-white">Amina</p>
+                <p class="text-sm text-slate-400">Community member</p>
+              </div>
+            </div>
+          </article>
+          <article class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 p-8 shadow-soft reveal testimonial-card">
+            <div class="relative z-10 space-y-4">
+              <p class="text-base leading-7 text-slate-300">"Her approach to youth mentorship is both authentic and transformational. I felt supported to step into leadership with courage."</p>
+              <div class="mt-6">
+                <p class="font-semibold text-white">Mary</p>
+                <p class="text-sm text-slate-400">Program participant</p>
+              </div>
+            </div>
+          </article>
+          <article class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/85 p-8 shadow-soft reveal testimonial-card">
+            <div class="relative z-10 space-y-4">
+              <p class="text-base leading-7 text-slate-300">"The support we received as an organization was thoughtful, strategic, and deeply human. Jackie helped us refine our mission and elevate our impact."</p>
+              <div class="mt-6">
+                <p class="font-semibold text-white">Community leader</p>
+                <p class="text-sm text-slate-400">Organizational partner</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="relative overflow-hidden bg-slate-950/95 py-24 sm:py-28">
+      <div class="absolute inset-x-0 bottom-0 top-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(224,176,201,0.12),_transparent_25%)]"></div>
+      <div class="mx-auto relative max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-12 lg:grid-cols-[0.95fr_0.85fr] lg:items-center">
+          <div class="space-y-6 reveal">
+            <p class="text-sm uppercase tracking-[0.3em] text-rose-200">Contact</p>
+            <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Ready to turn your next chapter into a stronger, more confident story?</h2>
+            <p class="max-w-2xl text-base leading-8 text-slate-300">Reach out for personalized guidance on immigration, mentorship, community leadership, or organizational support.</p>
+            <div class="grid gap-4 rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-soft">
+              <div>
+                <p class="text-sm uppercase tracking-[0.3em] text-slate-400">Email</p>
+                <p class="mt-2 text-lg font-semibold text-white">Jackiekariuki@gmail.com</p>
+              </div>
+              <div>
+                <p class="text-sm uppercase tracking-[0.3em] text-slate-400">Phone</p>
+                <p class="mt-2 text-lg font-semibold text-white">+123 456 7890</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-[2rem] border border-white/10 bg-slate-950/90 p-8 shadow-soft reveal">
+            <form id="contact-form" class="space-y-5">
+              <div>
+                <label class="text-sm font-medium text-slate-200" for="name">Name</label>
+                <input id="name" name="name" type="text" required class="mt-3 w-full rounded-3xl border border-white/10 bg-slate-900/95 px-5 py-4 text-white placeholder:text-slate-500 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20" placeholder="Your Name" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-slate-200" for="email">Email</label>
+                <input id="email" name="email" type="email" required class="mt-3 w-full rounded-3xl border border-white/10 bg-slate-900/95 px-5 py-4 text-white placeholder:text-slate-500 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20" placeholder="Your Email" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-slate-200" for="subject">Subject</label>
+                <input id="subject" name="subject" type="text" required class="mt-3 w-full rounded-3xl border border-white/10 bg-slate-900/95 px-5 py-4 text-white placeholder:text-slate-500 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20" placeholder="Subject" />
+              </div>
+              <div>
+                <label class="text-sm font-medium text-slate-200" for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required class="mt-3 w-full rounded-[1.5rem] border border-white/10 bg-slate-900/95 px-5 py-4 text-white placeholder:text-slate-500 focus:border-rose focus:outline-none focus:ring-2 focus:ring-rose/20" placeholder="Message"></textarea>
+              </div>
+              <div class="space-y-3 text-center">
+                <p id="form-loading" class="hidden text-sm text-rose-200">Sending…</p>
+                <p id="form-success" class="hidden text-sm text-emerald-300">✅ Your message has been sent. Thank you!</p>
+                <p id="form-error" class="hidden text-sm text-rose-300">Something went wrong. Please try again.</p>
+                <button type="submit" class="inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-rose to-gold px-8 py-4 text-sm font-semibold text-ink shadow-soft transition hover:scale-[1.01]">Submit Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-slate-950/95 py-10">
+    <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:justify-between">
+      <div class="space-y-3">
+        <p class="text-sm uppercase tracking-[0.35em] text-rose-200">Jacqueline Kariuki</p>
+        <p class="max-w-xl text-sm leading-7 text-slate-400">Professional community leader delivering thoughtful support for immigrants, youth, and organizations in Canada.</p>
+      </div>
+      <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-8">
+        <a href="#contact" class="text-sm font-semibold text-white transition hover:text-rose-100">Contact</a>
+        <a href="blog.html" class="text-sm font-semibold text-white transition hover:text-rose-100">Stories</a>
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" class="max-w-6xl mx-auto px-6 py-24">
-
-  <p class="text-sm uppercase tracking-[0.3em] text-rose-500">Contact</p>
-
-  <h2 class="serif text-4xl mt-4">Let’s have a focused conversation</h2>
-
-  <p class="text-gray-600 mt-4 max-w-xl">
-    The fastest way to connect is to book a call below. You can also send a short message if needed.
-  </p>
-
-  <div class="grid md:grid-cols-2 gap-10 mt-12">
-
-    <!-- CALENDLY -->
-    <div class="p-8 rounded-3xl bg-white shadow-soft border border-black/5">
-      <h3 class="font-semibold text-lg">Book a Call</h3>
-
-      <p class="text-sm text-gray-500 mt-2">
-        Choose a time that works for you.
-      </p>
-
-      <a href="YOUR_CALENDLY_LINK_HERE"
-         class="mt-6 inline-flex w-full justify-center bg-ink text-white py-3 rounded-full">
-        Schedule via Calendly
-      </a>
+    <div class="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row">
+        <p>&copy; <span id="year"></span> Jacqueline Kariuki. All Rights Reserved.</p>
+        <p>Designed by <a href="https://www.eunicegichuhi.site/" class="font-semibold text-rose-100 transition hover:text-rose-200">Eunice Gichuhi</a></p>
+      </div>
     </div>
+  </footer>
 
-    <!-- FORM -->
-    <div class="p-8 rounded-3xl bg-white shadow-soft border border-black/5">
+  <script>
+    const toggleButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-      <form id="contact-form" class="space-y-4">
-
-        <input class="w-full p-3 rounded-xl border" placeholder="Name" />
-        <input class="w-full p-3 rounded-xl border" placeholder="Subject" />
-        <textarea class="w-full p-3 rounded-xl border" rows="4" placeholder="Message"></textarea>
-
-        <button class="w-full bg-rose text-white py-3 rounded-full">
-          Send Message
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-</section>
-
-</main>
-
-<script>
-  const items = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
+    toggleButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
-  }, { threshold: 0.1 });
 
-  items.forEach(i => observer.observe(i));
-</script>
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = { threshold: 0.15 };
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    revealElements.forEach((el) => revealObserver.observe(el));
 
+    const progressBar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = `${progress}%`;
+    });
+
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const loading = document.getElementById('form-loading');
+      const success = document.getElementById('form-success');
+      const error = document.getElementById('form-error');
+      const submitButton = form.querySelector('button[type="submit"]');
+
+      loading.classList.remove('hidden');
+      success.classList.add('hidden');
+      error.classList.add('hidden');
+      submitButton.disabled = true;
+
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        jackieEmail: 'jackiekariuki@gmail.com',
+        sendClientConfirmation: true,
+        source: 'Website contact form',
+        timestamp: new Date().toISOString()
+      };
+
+      try {
+        const response = await fetch('https://hook.us2.make.com/ngmp2bfno7rilhc9ozghuop2i4jcqnsx', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        loading.classList.add('hidden');
+        if (response.ok) {
+          form.reset();
+          success.classList.remove('hidden');
+        } else {
+          error.classList.remove('hidden');
+          submitButton.disabled = false;
+        }
+      } catch (err) {
+        console.error('Error:', err);
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+        submitButton.disabled = false;
+      }
+    });
+  </script>
 </body>
+
 </html>
