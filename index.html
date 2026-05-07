@@ -17,21 +17,33 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#14141b',
-            rose: '#e0b0c9',
-            blush: '#f7e4f2',
-            cream: '#fbf3f8',
-            gold: '#c9977f'
-          },
-          boxShadow: {
-            soft: '0 24px 80px rgba(20,20,27,0.12)'
-          }
-        }
+  theme: {
+    extend: {
+      colors: {
+        // Core neutrals
+        ink: '#0F3D3E',        // Deep Teal (replaces old dark ink)
+        charcoal: '#1F2937',   // Main text / dark neutral
+        
+        // Light backgrounds & surfaces
+        cream: '#F8FAFC',      // Soft White (main background)
+        light: '#F8FAFC',      // Alias for convenience
+        
+        // Primary brand color
+        teal: '#14B8A6',       // Primary Teal
+        
+        // Accents
+        gold: '#D4AF37',       // Premium subtle gold
+        coral: '#FF886E',      // Accent 2 (warm highlight)
+        
+        // Optional softer variants (if needed)
+        tealLight: '#5EEAD4',  // Light teal for hover states / accents
+      },
+      boxShadow: {
+        soft: '0 24px 80px rgba(15, 61, 62, 0.12)' // Updated with Deep Teal
       }
     }
+  }
+}
   </script>
 
   <style>
