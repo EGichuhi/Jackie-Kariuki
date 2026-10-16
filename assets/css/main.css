@@ -1939,8 +1939,7 @@ section,
     margin-top: 30px;
   }
 }
-<style>
-  .stories-swiper { padding: 10px 0 20px; }
+.stories-swiper { padding: 10px 0 20px; }
   /* linear easing = smooth, constant drift instead of stop-and-go */
   .stories-swiper .swiper-wrapper { transition-timing-function: linear !important; }
   .stories-swiper .swiper-slide { height: auto; }
@@ -1970,7 +1969,7 @@ section,
     margin-bottom: 12px;
   }
   .post-card .read-more { margin-top: auto; font-weight: 600; text-decoration: none; color: var(--accent-color, inherit); }
-</style>
+
 
 /*--------------------------------------------------------------
 # Starter Section Section
