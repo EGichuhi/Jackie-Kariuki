@@ -244,37 +244,6 @@
   refreshButton.addEventListener('click', loadEvents);
   retryButton.addEventListener('click', loadEvents);
 
-  const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
-  mobileNavToggle.addEventListener('click', () => {
-    const expanded = mobileNavToggle.getAttribute('aria-expanded') === 'true';
-    document.body.classList.toggle('mobile-nav-active', !expanded);
-    mobileNavToggle.setAttribute('aria-expanded', String(!expanded));
-    mobileNavToggle.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-    mobileNavToggle.firstElementChild.classList.toggle('bi-list', expanded);
-    mobileNavToggle.firstElementChild.classList.toggle('bi-x', !expanded);
-  });
-
-  document.querySelectorAll('#navmenu a').forEach((link) => {
-    link.addEventListener('click', () => {
-      document.body.classList.remove('mobile-nav-active');
-      mobileNavToggle.setAttribute('aria-expanded', 'false');
-      mobileNavToggle.setAttribute('aria-label', 'Open navigation');
-      mobileNavToggle.firstElementChild.classList.add('bi-list');
-      mobileNavToggle.firstElementChild.classList.remove('bi-x');
-    });
-  });
-
-  const scrollTop = document.getElementById('scroll-top');
-  function updateScrollTop() {
-    scrollTop.classList.toggle('active', window.scrollY > 100);
-  }
-  scrollTop.addEventListener('click', (event) => {
-    event.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  window.addEventListener('scroll', updateScrollTop);
-  updateScrollTop();
-
   document.getElementById('year').textContent = new Date().getFullYear();
   loadEvents();
 })();

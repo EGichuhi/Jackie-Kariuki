@@ -15,7 +15,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,18 +47,20 @@
         <h1 class="sitename">Jackie Kariuki</h1>
       </a>
 
-      <nav id="navmenu" class="navmenu">
+      <nav id="navmenu" class="navmenu" aria-label="Main navigation">
         <ul>
           <li><a href="index.html#hero">Home</a></li>
           <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#services" class="active">Services</a></li>
+          <li><a href="index.html#services" class="active" aria-current="page">Services</a></li>
           <li><a href="index.html#portfolio">Community</a></li>
                     <li><a href="events.html">Events</a></li>
           <li><a href="blog.html" >Stories</a></li>
           <li><a href="index.html#contact">Contact</a></li>
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+      <button class="mobile-nav-toggle d-xl-none" type="button" aria-label="Open navigation" aria-controls="navmenu" aria-expanded="false">
+        <i class="bi bi-list" aria-hidden="true"></i>
+      </button>
 
       <!-- div class="header-social-links">
         <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
@@ -205,7 +207,7 @@
                 <p>Opportunities to connect with professionals in your field</p>
               </div>
               <div class="service-item">
-                <<i class="bi bi-translate"></i>
+                <i class="bi bi-translate"></i>
                 <h5><a href="#">Language Support</a></h5>
                 <p>Connections to ESL programs and language learning resources</p>
               </div>
@@ -221,20 +223,27 @@
   </main>
 
   <footer id="footer" class="footer">
-
     <div class="container">
-      <div class="copyright text-center">
+      <div class="footer-main">
+        <div>
+          <a class="footer-name" href="index.html">Jacqueline Kariuki</a>
+          <p class="footer-note">Leadership, guidance, and stronger communities.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html#about">About</a>
+          <a href="index.html#services" aria-current="page">Services</a>
+          <a href="index.html#portfolio">Community</a>
+          <a href="events.html">Events</a>
+          <a href="blog.html">Stories</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="mailto:Jackiekariuki@gmail.com">Email Jackie</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
         <p>&copy; <span id="year"></span> Jacqueline Kariuki. All Rights Reserved.</p>
         <p>Designed by <a href="https://www.safibase.ca/">Eunice Gichuhi</a></p>
       </div>
-      <div class="social-links d-flex justify-content-center">
-        <!--a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a -->
-      </div>
     </div>
-
   </footer>
 
   <!-- Scroll Top -->

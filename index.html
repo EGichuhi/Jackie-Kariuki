@@ -15,7 +15,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Questrial:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -39,9 +39,9 @@
         <h1 class="sitename">Jacqueline Kariuki</h1>
       </a>
 
-      <nav id="navmenu" class="navmenu">
+      <nav id="navmenu" class="navmenu" aria-label="Main navigation">
         <ul>
-          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#hero" class="active" aria-current="page">Home</a></li>
           <li><a href="index.html#about">About</a></li>
           <li><a href="index.html#services">Services</a></li>
           <li><a href="index.html#portfolio">Community</a></li>
@@ -57,8 +57,10 @@
             </ul>
           </li-->
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
+      <button class="mobile-nav-toggle d-xl-none" type="button" aria-label="Open navigation" aria-controls="navmenu" aria-expanded="false">
+        <i class="bi bi-list" aria-hidden="true"></i>
+      </button>
 
       <!-- div class="header-social-links">
         <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
@@ -102,7 +104,7 @@
           </div>
           <div class="col-lg-6">
             <div class="hero-image">
-              <img src="assets/img/profile/profile-1.webp" alt="Portfolio Hero Image" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
+              <img src="assets/img/profile/profile-1.webp" alt="Jacqueline Kariuki" class="img-fluid" data-aos="zoom-out" data-aos-delay="300">
               <div class="shape-1"></div>
               <div class="shape-2"></div>
             </div>
@@ -157,7 +159,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-delay="200">
             <div class="about-image">
-              <img src="assets/img/profile/profile-square-2.webp" alt="Profile Image" class="img-fluid rounded-4">
+              <img src="assets/img/profile/profile-square-2.webp" alt="Jacqueline Kariuki" class="img-fluid rounded-4">
             </div>
           </div>
 
@@ -500,7 +502,7 @@
             <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
               <div class="portfolio-card">
                 <div class="portfolio-image">
-                  <img src="assets/img/portfolio/portfolio-1.webp" class="img-fluid" alt="" loading="lazy">
+                  <img src="assets/img/portfolio/portfolio-1.webp" class="img-fluid" alt="Biashara Africa Business Club" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a href="assets/img/portfolio/portfolio-1.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
@@ -519,7 +521,7 @@
             <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
               <div class="portfolio-card">
                 <div class="portfolio-image">
-                  <img src="assets/img/portfolio/portfolio-10.webp" class="img-fluid" alt="" loading="lazy">
+                  <img src="assets/img/portfolio/portfolio-10.webp" class="img-fluid" alt="Kenyan Community in Ontario" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a href="assets/img/portfolio/portfolio-10.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
@@ -539,7 +541,7 @@
             <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-motion">
               <div class="portfolio-card">
                 <div class="portfolio-image">
-                  <img src="assets/img/portfolio/portfolio-7.webp" class="img-fluid" alt="" loading="lazy">
+                  <img src="assets/img/portfolio/portfolio-7.webp" class="img-fluid" alt="Hannah Community" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a href="assets/img/portfolio/portfolio-7.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-motion"><i class="bi bi-eye"></i></a>
@@ -558,7 +560,7 @@
             <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-brand">
               <div class="portfolio-card">
                 <div class="portfolio-image">
-                  <img src="assets/img/portfolio/portfolio-4.webp" class="img-fluid" alt="" loading="lazy">
+                  <img src="assets/img/portfolio/portfolio-4.webp" class="img-fluid" alt="Accessibility For All" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a href="assets/img/portfolio/portfolio-4.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-brand"><i class="bi bi-eye"></i></a>
@@ -577,7 +579,7 @@
             <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-web">
               <div class="portfolio-card">
                 <div class="portfolio-image">
-                  <img src="assets/img/portfolio/portfolio-2.webp" class="img-fluid" alt="" loading="lazy">
+                  <img src="assets/img/portfolio/portfolio-2.webp" class="img-fluid" alt="Women Investing Together" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a href="assets/img/portfolio/portfolio-2.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-web"><i class="bi bi-eye"></i></a>
@@ -596,7 +598,7 @@
             <div class="col-lg-6 col-md-6 portfolio-item isotope-item filter-graphics">
               <div class="portfolio-card">
                 <div class="portfolio-image">
-                  <img src="assets/img/portfolio/portfolio-11.webp" class="img-fluid" alt="" loading="lazy">
+                  <img src="assets/img/portfolio/portfolio-11.webp" class="img-fluid" alt="WOW Blessings Toronto" loading="lazy">
                   <div class="portfolio-overlay">
                     <div class="portfolio-actions">
                       <a href="assets/img/portfolio/portfolio-11.webp" class="glightbox preview-link" data-gallery="portfolio-gallery-graphics"><i class="bi bi-eye"></i></a>
@@ -881,21 +883,21 @@
               <input type="hidden" name="subject" value="New Contact from Jackie's Website">
               <div class="row gy-4">
                 <div class="col-12">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" aria-label="Your name" autocomplete="name" required>
                 </div>
                 <div class="col-12">
-                  <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                  <input type="email" name="email" class="form-control" placeholder="Your Email" aria-label="Your email" autocomplete="email" required>
                 </div>
                 <div class="col-12">
-                  <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                  <input type="text" name="subject" class="form-control" placeholder="Subject" aria-label="Subject" required>
                 </div>
                 <div class="col-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" aria-label="Message" required></textarea>
                 </div>
                 <div class="col-12 text-center">
-                  <div id="form-loading" style="display:none; color:#666; margin-bottom:10px;">Sending…</div>
-                  <div id="form-success" style="display:none; color:green; font-weight:600; margin-bottom:10px;">✅ Your message has been sent. Thank you!</div>
-                  <div id="form-error" style="display:none; color:red; margin-bottom:10px;">Something went wrong. Please try again.</div>
+                  <div id="form-loading" role="status" aria-live="polite" style="display:none; color:#666; margin-bottom:10px;">Sending…</div>
+                  <div id="form-success" role="status" aria-live="polite" style="display:none; color:green; font-weight:600; margin-bottom:10px;">Your message has been sent. Thank you!</div>
+                  <div id="form-error" role="alert" style="display:none; color:red; margin-bottom:10px;">Something went wrong. Please try again.</div>
                   <button type="submit" class="btn btn-submit w-100">Submit Message</button>
                 </div>
               </div>
@@ -910,21 +912,27 @@
   </main>
 
   <footer id="footer" class="footer">
-
     <div class="container">
-      <div class="copyright text-center">
+      <div class="footer-main">
+        <div>
+          <a class="footer-name" href="index.html">Jacqueline Kariuki</a>
+          <p class="footer-note">Leadership, guidance, and stronger communities.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html#about">About</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#portfolio">Community</a>
+          <a href="events.html">Events</a>
+          <a href="blog.html">Stories</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="mailto:Jackiekariuki@gmail.com">Email Jackie</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
         <p>&copy; <span id="year"></span> Jacqueline Kariuki. All Rights Reserved.</p>
         <p>Designed by <a href="https://www.safibase.ca/">Eunice Gichuhi</a></p>
       </div>
-      <div class="social-links d-flex justify-content-center">
-        <!-- a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a -->
-      </div>
-      <div class="credits"></div>
     </div>
-
   </footer>
 
   <!-- Scroll Top -->

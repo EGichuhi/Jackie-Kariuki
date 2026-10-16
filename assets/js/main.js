@@ -15,6 +15,7 @@
   function toggleScrolled() {
     const selectBody = document.querySelector('body');
     const selectHeader = document.querySelector('#header');
+    if (!selectHeader) return;
     if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
     window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
   }
@@ -28,9 +29,16 @@
   const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
 
   function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
+    const isOpen = document.body.classList.toggle('mobile-nav-active');
+    const icon = mobileNavToggleBtn?.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('bi-list', !isOpen);
+      icon.classList.toggle('bi-x', isOpen);
+    }
+    if (mobileNavToggleBtn) {
+      mobileNavToggleBtn.setAttribute('aria-expanded', String(isOpen));
+      mobileNavToggleBtn.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    }
   }
   if (mobileNavToggleBtn) {
     mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
@@ -46,6 +54,13 @@
       }
     });
 
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.body.classList.contains('mobile-nav-active')) {
+      mobileNavToogle();
+      mobileNavToggleBtn?.focus();
+    }
   });
 
   /**
@@ -70,13 +85,15 @@
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
   }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  if (scrollTop) {
+    scrollTop.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
 
   window.addEventListener('load', toggleScrollTop);
   document.addEventListener('scroll', toggleScrollTop);
@@ -85,7 +102,8 @@
    * Animation on scroll function and init
    */
   function aosInit() {
-    AOS.init({
+    if (!window.AOS) return;
+    window.AOS.init({
       duration: 600,
       easing: 'ease-in-out',
       once: true,
@@ -99,6 +117,7 @@
    */
   let skillsAnimation = document.querySelectorAll('.skills-animation');
   skillsAnimation.forEach((item) => {
+    if (!window.Waypoint) return;
     new Waypoint({
       element: item,
       offset: '80%',
@@ -114,14 +133,15 @@
   /**
    * Initiate glightbox
    */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
+  if (window.GLightbox && document.querySelector('.glightbox')) {
+    window.GLightbox({ selector: '.glightbox' });
+  }
 
   /**
    * Init isotope layout and filters
    */
   document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+    if (!window.imagesLoaded || !window.Isotope) return;
     let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
     let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
     let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
@@ -138,8 +158,9 @@
 
     isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
       filters.addEventListener('click', function() {
-        isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
+        isotopeItem.querySelector('.isotope-filters .filter-active')?.classList.remove('filter-active');
         this.classList.add('filter-active');
+        if (!initIsotope) return;
         initIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
@@ -155,12 +176,13 @@
    * Init swiper sliders
    */
   function initSwiper() {
+    if (!window.Swiper) return;
     document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
+      const configElement = swiperElement.querySelector(".swiper-config");
+      if (!configElement) return;
+      let config = JSON.parse(configElement.innerHTML.trim());
 
-      if (swiperElement.classList.contains("swiper-tab")) {
+      if (swiperElement.classList.contains("swiper-tab") && window.initSwiperWithCustomPagination) {
         initSwiperWithCustomPagination(swiperElement, config);
       } else {
         new Swiper(swiperElement, config);
