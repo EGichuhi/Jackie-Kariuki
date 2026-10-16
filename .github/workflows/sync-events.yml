@@ -17,26 +17,11 @@ jobs:
           ref: main
 
       - name: Fetch events JSON
-        env:
-          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
-          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
         run: |
           mkdir -p data
-          if [[ -n "$CF_ACCESS_CLIENT_ID" || -n "$CF_ACCESS_CLIENT_SECRET" ]]; then
-            if [[ -z "$CF_ACCESS_CLIENT_ID" || -z "$CF_ACCESS_CLIENT_SECRET" ]]; then
-              echo "Set both Cloudflare Access service-token secrets."
-              exit 1
-            fi
-            curl -fsSL --retry 3 --max-time 30 \
-              -H "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
-              -H "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
-              "https://jackie-kariuki-events.ewgichuh.workers.dev/" \
-              -o data/events.json
-          else
-            curl -fsSL --retry 3 --max-time 30 \
-              "https://jackie-kariuki-events.ewgichuh.workers.dev/" \
-              -o data/events.json
-          fi
+          curl -fsSL --retry 3 --max-time 30 \
+            "https://jackie-kariuki-events.ewgichuh.workers.dev/" \
+            -o data/events.json
           node -e 'const data = require("./data/events.json"); if (!Array.isArray(data.events)) throw new Error("Worker response is not an events JSON payload."); console.log(`Fetched ${data.events.length} events.`);'
 
       - name: Commit changes

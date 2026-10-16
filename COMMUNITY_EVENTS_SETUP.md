@@ -16,7 +16,8 @@ The calendar can remain private. Its Secret address in iCal format grants read a
 The repository uses the root-level `wrangler.toml` and `src/index.js` for the deployed Worker `jackie-kariuki-events`.
 
 1. In Worker settings, add `ICAL_URL` as a **Secret** using the iCal URL. Do not add it to `wrangler.toml` or as a plaintext variable.
-2. Deploy the Worker. Check that `https://jackie-kariuki-events.ewgichuh.workers.dev/` returns JSON, not an Access login page.
+2. Allow anonymous access to this events-only Worker endpoint by removing its Cloudflare Access protection or adding a narrowly scoped bypass for the Worker hostname. The Worker returns public event details but does not reveal the iCal URL.
+3. Check that `https://jackie-kariuki-events.ewgichuh.workers.dev/` returns JSON, not an Access login page.
 
 The supplied ICS parser does not expand `RRULE` recurring events. Each VEVENT is published as it appears in the feed; a recurring event whose DTSTART is in the past may not appear as upcoming. Use one-off VEVENTs or replace the parser with a recurrence-aware implementation if recurring events are needed.
 
@@ -24,13 +25,6 @@ The supplied ICS parser does not expand `RRULE` recurring events. Each VEVENT is
 
 The workflow `.github/workflows/sync-events.yml` runs every six hours and writes the Worker response to `data/events.json`.
 
-The Worker currently redirects to Cloudflare Access. To keep it protected, create an Access service token and add both values under the repository’s **Settings → Secrets and variables → Actions → New repository secret**:
-
-- `CF_ACCESS_CLIENT_ID`
-- `CF_ACCESS_CLIENT_SECRET`
-
-Add an Access service-auth policy that allows this token to reach the Worker. The workflow sends the token headers when both secrets are present and validates the JSON before committing it. Never put service-token values in the workflow file.
-
-If you intentionally make this events-only Worker accessible without Access, the workflow can fetch it without those GitHub secrets. The response contains public event details.
+The workflow fetches the public events-only endpoint without authentication and validates the response before committing it. A Cloudflare API token is only needed if GitHub Actions will deploy the Worker itself; it does not grant runtime access to a Worker protected by Cloudflare Access. Since this Worker is already deployed, no deployment token is needed for event syncing.
 
 Run the workflow manually from the GitHub **Actions** tab to test the first sync. The website reads `/data/events.json`; GitHub Pages and browser code do not need Google credentials.
