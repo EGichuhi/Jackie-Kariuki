@@ -1023,19 +1023,18 @@
 
       new Swiper('.stories-swiper', {
         loop: true,
-        speed: 7000,                 // higher = slower drift
-        spaceBetween: 24,
-        slidesPerView: 1.2,
+        speed: 9000,                 // slower, calmer drift
+        spaceBetween: 40,            // gap between stories
+        slidesPerView: 1.1,
         allowTouchMove: true,
         autoplay: {
-          delay: 0,                  // no pause between moves = continuous motion
+          delay: 0,
           disableOnInteraction: false,
-          pauseOnMouseEnter: true    // hover to stop and read
+          pauseOnMouseEnter: true
         },
         breakpoints: {
-          576:  { slidesPerView: 2 },
-          992:  { slidesPerView: 3 },
-          1200: { slidesPerView: 4 }
+          640:  { slidesPerView: 2, spaceBetween: 32 },
+          1024: { slidesPerView: 3, spaceBetween: 40 }
         }
       });
     }
