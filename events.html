@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Community Events | Jacqueline Kariuki</title>
+  <meta name="description" content="Discover upcoming community gatherings, workshops, celebrations and opportunities to connect.">
+
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Noto+Sans:wght@400;600;700&family=Questrial&display=swap" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/main.css?v=community-events-1" rel="stylesheet">
+</head>
+
+<body class="events-page">
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Jacqueline Kariuki</h1>
+      </a>
+      <nav id="navmenu" class="navmenu" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#portfolio">Community</a></li>
+          <li><a href="events.html" class="active" aria-current="page">Events</a></li>
+          <li><a href="blog.html">Stories</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-nav-toggle d-xl-none" type="button" aria-label="Open navigation" aria-controls="navmenu" aria-expanded="false">
+        <i class="bi bi-list" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main id="events-page" class="main" data-events-endpoint="/api/events">
+    <section class="community-events-hero">
+      <div class="container">
+        <p class="community-events-eyebrow">COMMUNITY EVENTS</p>
+        <h1>There's always something happening.</h1>
+        <p class="community-events-intro">Discover upcoming gatherings, workshops, celebrations and opportunities to connect.</p>
+      </div>
+    </section>
+
+    <section class="community-events-content" aria-labelledby="upcoming-events-heading">
+      <div class="container">
+        <div class="community-events-toolbar">
+          <h2 id="upcoming-events-heading">Upcoming events</h2>
+          <div class="community-events-controls">
+            <div class="event-filters" role="group" aria-label="Filter events">
+              <button type="button" class="event-filter is-active" data-filter="all" aria-pressed="true">
+                <i class="bi bi-calendar2-week" aria-hidden="true"></i> All Events
+              </button>
+              <button type="button" class="event-filter" data-filter="month" aria-pressed="false">
+                <i class="bi bi-calendar3" aria-hidden="true"></i> This Month
+              </button>
+              <button type="button" class="event-filter" data-filter="workshops" aria-pressed="false">
+                <i class="bi bi-easel" aria-hidden="true"></i> Workshops
+              </button>
+            </div>
+            <button type="button" id="events-refresh" class="events-refresh" aria-label="Refresh events" title="Refresh events">
+              <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+              <span>Refresh</span>
+            </button>
+          </div>
+        </div>
+
+        <p id="events-announcer" class="visually-hidden" role="status" aria-live="polite"></p>
+        <div id="events-loading" class="events-message" role="status" aria-live="polite">
+          <span class="events-spinner" aria-hidden="true"></span>
+          <span>Loading upcoming events…</span>
+        </div>
+        <div id="events-error" class="events-message events-error" role="alert" hidden>
+          <i class="bi bi-cloud-exclamation" aria-hidden="true"></i>
+          <div>
+            <p>Events couldn't be loaded right now.</p>
+            <button type="button" id="events-retry" class="events-retry">Try again</button>
+          </div>
+        </div>
+        <p id="events-empty" class="events-message" hidden></p>
+        <ul id="events-list" class="events-list" aria-label="Upcoming community events" hidden></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="copyright text-center">
+      <p>&copy; <span id="year"></span> Jacqueline Kariuki. All Rights Reserved.</p>
+      <p>Designed by <a href="https://www.safibase.ca/">Eunice Gichuhi</a></p>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top">
+    <i class="bi bi-arrow-up-short" aria-hidden="true"></i>
+  </a>
+
+  <script src="assets/js/events.js" defer></script>
+</body>
+
+</html>
