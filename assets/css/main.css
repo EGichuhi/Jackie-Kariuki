@@ -1949,35 +1949,37 @@ section,
 .stories-swiper .swiper-slide { height: auto; }
 
 .latest-stories .post-card {
-  min-height: 116px;
+  position: relative;
+  min-height: 112px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 8px;
-  padding: 10px;
+  padding: 34px 18px 18px;
   background: var(--surface-color, #fff);
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 8px;
-  transition: border-color .2s ease, background-color .2s ease;
-  text-align: center;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.latest-stories .post-card::before {
+  position: absolute;
+  top: 17px;
+  left: 18px;
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent-color, #666);
+  content: "";
 }
 .latest-stories .post-card:hover {
+  transform: translateY(-2px);
   border-color: var(--accent-color, #666);
-}
-
-.latest-stories .post-card .post-thumb {
-  width: 72px;
-  height: 48px;
-  flex: 0 0 48px;
-  border-radius: 5px;
-  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .07);
 }
 
 .latest-stories .post-card h3 {
   min-width: 0;
   margin: 0;
-  font-size: .95rem;
+  font-size: 1rem;
   line-height: 1.35;
 }
 .latest-stories .post-card h3 a {

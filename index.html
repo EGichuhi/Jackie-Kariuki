@@ -1000,7 +1000,6 @@
       list.innerHTML = slides.map((p) => `
         <div class="swiper-slide">
           <article class="post-card">
-            ${p.thumbnail ? `<img class="post-thumb" src="${escapeHtml(p.thumbnail)}" alt="">` : ''}
             <h3><a href="post.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a></h3>
           </article>
         </div>
