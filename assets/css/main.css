@@ -1949,24 +1949,27 @@ section,
 .stories-swiper .swiper-slide { height: auto; }
 
 .latest-stories .post-card {
-  min-height: 76px;
+  min-height: 116px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 9px;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
   background: var(--surface-color, #fff);
   border: 1px solid rgba(0, 0, 0, .08);
   border-radius: 8px;
   transition: border-color .2s ease, background-color .2s ease;
+  text-align: center;
 }
 .latest-stories .post-card:hover {
   border-color: var(--accent-color, #666);
 }
 
 .latest-stories .post-card .post-thumb {
-  width: 56px;
-  height: 56px;
-  flex: 0 0 56px;
+  width: 72px;
+  height: 48px;
+  flex: 0 0 48px;
   border-radius: 5px;
   object-fit: cover;
 }
@@ -1974,7 +1977,7 @@ section,
 .latest-stories .post-card h3 {
   min-width: 0;
   margin: 0;
-  font-size: 1rem;
+  font-size: .95rem;
   line-height: 1.35;
 }
 .latest-stories .post-card h3 a {
