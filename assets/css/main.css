@@ -1949,39 +1949,32 @@ section,
 .stories-swiper .swiper-slide { height: auto; }
 
 .latest-stories .post-card {
+  --bubble-fill: #ffe6d6;
+  --bubble-border: #f2c4a5;
+  --bubble-shadow: #e4b392;
   min-height: 112px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 22px 20px;
-  background: #ffe6d6;
-  border: 1px solid #f2c4a5;
-  border-radius: 28px 28px 28px 8px;
-  box-shadow: 0 6px 18px rgba(179, 100, 52, .10);
+  padding: 10px;
+  background: transparent;
+  border: 0;
   text-align: center;
-  transition: transform .25s ease, box-shadow .25s ease;
 }
 .stories-swiper .swiper-slide:nth-child(4n + 2) .post-card {
-  background: #ddf4e8;
-  border-color: #aedcc1;
-  border-radius: 28px 28px 8px 28px;
-  box-shadow: 0 6px 18px rgba(54, 128, 90, .10);
+  --bubble-fill: #ddf4e8;
+  --bubble-border: #aedcc1;
+  --bubble-shadow: #9bcdb1;
 }
 .stories-swiper .swiper-slide:nth-child(4n + 3) .post-card {
-  background: #fff1bf;
-  border-color: #ead77d;
-  border-radius: 28px 8px 28px 28px;
-  box-shadow: 0 6px 18px rgba(153, 125, 39, .10);
+  --bubble-fill: #fff1bf;
+  --bubble-border: #ead77d;
+  --bubble-shadow: #dcca73;
 }
 .stories-swiper .swiper-slide:nth-child(4n) .post-card {
-  background: #dfedfc;
-  border-color: #b5cee9;
-  border-radius: 8px 28px 28px 28px;
-  box-shadow: 0 6px 18px rgba(63, 108, 159, .10);
-}
-.latest-stories .post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(15, 41, 67, .14);
+  --bubble-fill: #dfedfc;
+  --bubble-border: #b5cee9;
+  --bubble-shadow: #9ebbdc;
 }
 
 .latest-stories .post-card h3 {
@@ -1991,15 +1984,25 @@ section,
   line-height: 1.35;
 }
 .latest-stories .post-card h3 a {
-  display: -webkit-box;
+  display: inline-block;
+  max-width: 100%;
+  padding: 12px 20px;
   overflow: hidden;
   color: var(--heading-color, inherit);
+  background: var(--bubble-fill);
+  border: 1px solid var(--bubble-border);
+  border-radius: 24px 24px 24px 8px;
+  box-shadow: 0 4px 0 var(--bubble-shadow);
+  font-weight: 600;
   text-decoration: none;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  overflow-wrap: anywhere;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-.latest-stories .post-card h3 a:hover { color: var(--accent-color, inherit); }
+.latest-stories .post-card h3 a:hover {
+  color: var(--heading-color, inherit);
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 0 6px 0 var(--bubble-shadow);
+}
 
   .latest-stories .btn { padding: 12px 32px; }
   .latest-stories .text-center.mt-4 { margin-top: 24px !important; }
