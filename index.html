@@ -27,13 +27,6 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: EasyFolio
-  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
-  * Updated: Feb 21 2025 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body class="index-page">
@@ -119,7 +112,59 @@
       </div>
 
     </section><!-- /Hero Section -->
+    
+    <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+    const list = document.getElementById('blog-list');
+    const state = document.getElementById('blog-state');
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatDate(value) {
+      if (!value) return '';
+      const d = new Date(value);
+      if (Number.isNaN(d.getTime())) return value;
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function renderPosts(posts) {
+      if (!posts.length) {
+        state.textContent = 'No posts yet. Check back soon.';
+        return;
+      }
+      state.style.display = 'none';
+      list.innerHTML = posts.map((p) => `
+        <div class="col-md-6 col-lg-4">
+          <article class="post-card">
+            ${p.thumbnail ? `<img class="post-thumb" src="${escapeHtml(p.thumbnail)}" alt="">` : ''}
+            <div class="post-date">${escapeHtml(formatDate(p.date))}</div>
+            <h2><a href="post.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a></h2>
+            <p class="post-summary">${escapeHtml(p.summary || '')}</p>
+            <a class="read-more" href="post.html?slug=${encodeURIComponent(p.slug)}">Read more →</a>
+          </article>
+        </div>
+      `).join('');
+    }
+
+    fetch('/blog/posts.json')
+      .then((res) => {
+        if (!res.ok) throw new Error('Request failed');
+        return res.json();
+      })
+      .then(renderPosts)
+      .catch(() => {
+        state.textContent = 'Could not load posts. Please try again later.';
+      });
+  </script>
+    
     <!-- About Section -->
     <section id="about" class="about section light-background">
 
