@@ -4,7 +4,7 @@ date: 2026-10-16
 summary: |-
   2026 Theme 
   Celebrate Valentine’s Day 2026 with thoughtful gift ideas, romantic date inspiration, and creative ways to show love. Whether you’re planning a special evening with your partner, celebrating your friendships, or treating yourself, discover simple ways to make February 14 meaningful and memorable.
-thumbnail: ''
+thumbnail: /assets/img/blog/WhatsApp Image 2026-04-24 at 21.46.50 (2).jpeg
 ---
 
 # Valentine’s Day 2026: Romantic Ideas, Thoughtful Gifts, and Ways to Celebrate Love
