@@ -1,0 +1,9 @@
+name = "jackie-kariuki-events"
+main = "src/index.js"
+compatibility_date = "2026-10-12"
+
+[observability]
+enabled = true
+
+# ICAL_URL is stored as a Worker secret, not here.
+# Set it with: npx wrangler secret put ICAL_URL

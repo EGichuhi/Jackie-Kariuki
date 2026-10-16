@@ -26,7 +26,36 @@
   function parseCalendarDate(value) {
     if (!value) return null;
     if (value.dateTime) {
-      const date = new Date(value.dateTime);
+      const dateTime = value.dateTime;
+      const hasOffset = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(dateTime);
+      const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(dateTime);
+      let date;
+      if (match && value.timeZone && !hasOffset) {
+        const [, year, month, day, hour, minute, second = '0'] = match;
+        const localAsUtc = Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second));
+        const parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: value.timeZone,
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hourCycle: 'h23'
+        }).formatToParts(new Date(localAsUtc));
+        const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+        const renderedAsUtc = Date.UTC(
+          Number(values.year),
+          Number(values.month) - 1,
+          Number(values.day),
+          Number(values.hour),
+          Number(values.minute),
+          Number(values.second)
+        );
+        date = new Date(localAsUtc - (renderedAsUtc - localAsUtc));
+      } else {
+        date = new Date(dateTime);
+      }
       return Number.isNaN(date.getTime()) ? null : date;
     }
     if (value.date) {
@@ -128,6 +157,23 @@
     }
   }
 
+  function normalizeCalendarEvent(event) {
+    if (!event || typeof event.start !== 'string') return event;
+    const dateValue = (value, timeZone) => {
+      if (!value) return null;
+      if (event.allDay) return { date: value.slice(0, 10) };
+      return { dateTime: value, ...(timeZone ? { timeZone } : {}) };
+    };
+
+    return {
+      ...event,
+      status: String(event.status || 'confirmed').toLowerCase(),
+      start: dateValue(event.start, event.startTzid),
+      end: dateValue(event.end, event.endTzid || event.startTzid),
+      htmlLink: event.url || ''
+    };
+  }
+
   function renderEvent(event) {
     const dateParts = getDateParts(event);
     const start = event.start || {};
@@ -206,11 +252,12 @@
       if (!response.ok) throw new Error('Events request failed.');
 
       const payload = await response.json();
-      const items = Array.isArray(payload) ? payload : payload.items;
+      const items = Array.isArray(payload) ? payload : (payload.items || payload.events);
       if (!Array.isArray(items)) throw new Error('Events response is invalid.');
 
       const now = new Date();
       events = items
+        .map(normalizeCalendarEvent)
         .filter((event) => event && event.status !== 'cancelled' && isUpcoming(event, now))
         .sort((first, second) => parseCalendarDate(first.start) - parseCalendarDate(second.start));
       loading.hidden = true;

@@ -1,0 +1,52 @@
+name: Sync events from Google Calendar
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Fetch events JSON
+        env:
+          CF_ACCESS_CLIENT_ID: ${{ secrets.CF_ACCESS_CLIENT_ID }}
+          CF_ACCESS_CLIENT_SECRET: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+        run: |
+          mkdir -p data
+          if [[ -n "$CF_ACCESS_CLIENT_ID" || -n "$CF_ACCESS_CLIENT_SECRET" ]]; then
+            if [[ -z "$CF_ACCESS_CLIENT_ID" || -z "$CF_ACCESS_CLIENT_SECRET" ]]; then
+              echo "Set both Cloudflare Access service-token secrets."
+              exit 1
+            fi
+            curl -fsSL --retry 3 --max-time 30 \
+              -H "CF-Access-Client-Id: $CF_ACCESS_CLIENT_ID" \
+              -H "CF-Access-Client-Secret: $CF_ACCESS_CLIENT_SECRET" \
+              "https://jackie-kariuki-events.ewgichuh.workers.dev/" \
+              -o data/events.json
+          else
+            curl -fsSL --retry 3 --max-time 30 \
+              "https://jackie-kariuki-events.ewgichuh.workers.dev/" \
+              -o data/events.json
+          fi
+          node -e 'const data = require("./data/events.json"); if (!Array.isArray(data.events)) throw new Error("Worker response is not an events JSON payload."); console.log(`Fetched ${data.events.length} events.`);'
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/events.json
+          if git diff --cached --quiet; then
+            echo "Event snapshot is unchanged."
+          else
+            git commit -m "chore: sync events from Google Calendar [skip ci]"
+            git push origin main
+          fi
