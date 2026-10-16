@@ -1,32 +1,39 @@
 # Community Events Calendar Setup
 
-## Current Status
+## Architecture
 
-The site is published as static files on GitHub Pages and has no Google Calendar credentials or server-side API. The page requests `GET /api/events`; until that endpoint is deployed, it shows its friendly load-error state. No sample events or credentials are included in the site.
+GitHub Pages serves the static website. A Cloudflare Worker in `workers/calendar` reads a private Google Calendar iCal feed and returns upcoming events as JSON. The Events page keeps its custom layout, filters, loading states, and refresh behavior; it does not embed Google's calendar interface.
 
-## Google Cloud Setup
+The source calendar stays private, but events returned by the Worker are visible to website visitors. Use a separate calendar containing only events intended for the public. The iCal address grants read access to that calendar to anyone who obtains the URL, so store it only as a Cloudflare secret.
 
-1. Create or select a Google Cloud project and enable the Google Calendar API.
-2. Use a dedicated calendar containing only events intended for public display.
-3. Recommended for a server-owned calendar: create a service account, then share the calendar with its service-account email as a reader. Grant the backend the `https://www.googleapis.com/auth/calendar.readonly` scope. Confirm Workspace sharing policy allows this.
-4. If the calendar cannot be shared with a service account, configure the OAuth consent screen and an OAuth client. Complete the authorization once with the read-only scope and store the resulting refresh token on the server. Never put the client secret or refresh token in browser code.
+## Configure Google Calendar
 
-## Server Endpoint
+1. Create a separate calendar in the Gmail account and add only website events to it. Keep the calendar's access permissions private.
+2. In that calendar's settings, open **Integrate calendar** and copy **Secret address in iCal format**.
+3. Do not put this URL in GitHub, website HTML, or chat. If it is exposed, reset the secret iCal address in Google Calendar.
 
-Deploy a serverless endpoint separately from GitHub Pages, for example as a Cloudflare Worker or another server-side function. It should call Google Calendar `events.list` with `timeMin` set to now, `singleEvents=true`, `orderBy=startTime`, and pagination handled through `nextPageToken`. Return a JSON object with an `items` array using the Google Calendar event fields `summary`, `start`, `end`, `location`, `description`, `htmlLink`, `status`, and `extendedProperties` where present.
+## Configure Cloudflare
 
-Configure these backend environment secrets/values:
+1. Connect the repository `EGichuhi/Jackie-Kariuki` to a Cloudflare Worker using the `main` branch.
+2. Set the Worker project root to `workers/calendar`. The Wrangler configuration is `workers/calendar/wrangler.jsonc`; its Worker name is `jackie-calendar-api`.
+3. In Worker **Settings → Variables and Secrets**, add a secret named `CALENDAR_ICS_URL` and set its value to the secret iCal address. Never add this value to `wrangler.jsonc` or a plain-text variable.
+4. `EVENTS_ALLOWED_ORIGIN` is already declared in Wrangler as `https://jackiekariuki.ca`. Keep it aligned with the site's production origin.
+5. Deploy the Worker. Wrangler bundles the `ical.js` dependency from `workers/calendar/package.json`.
 
-- `GOOGLE_CALENDAR_ID`: ID of the dedicated calendar.
-- `GOOGLE_SERVICE_ACCOUNT_EMAIL`: service-account email, for service-account auth.
-- `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`: private key, stored only in the hosting provider's secret manager.
-- `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, `GOOGLE_OAUTH_REFRESH_TOKEN`: use these instead of the service-account credentials when using OAuth consent.
-- `EVENTS_ALLOWED_ORIGIN`: `https://jackiekariuki.ca`, used to restrict CORS.
+If setting up the Worker through Cloudflare Builds, use `workers/calendar` as the root directory and make sure the deployment runs `npm install` followed by `npm run deploy`. The Worker name in Cloudflare must match the name in `wrangler.jsonc`.
 
-The backend should expose only the public event fields, return errors with an appropriate HTTP status, and set a short cache lifetime (for example five minutes). Keep all keys, tokens, and authorization logic server-side. Set the endpoint URL on the page's `data-events-endpoint` attribute if it is not available at `/api/events`.
+## Connect the Website
 
-## Workshop Tagging
+The Worker exposes `GET /api/events` and returns `{ "items": [...] }` in the format expected by `assets/js/events.js`. After deployment, copy its `workers.dev` URL and set `data-events-endpoint` on the Events page to the full endpoint URL, for example:
 
-The page recognizes “workshop” in the event title or description, as well as a `category` value in Google Calendar `extendedProperties.shared` or `extendedProperties.private`. For consistent results, prefix workshop titles with `[Workshop]` or set the shared `category` property to `workshop` in the event integration.
+```text
+https://jackie-calendar-api.<your-account>.workers.dev/api/events
+```
 
-The page fetches on load and offers a manual refresh. The short server cache lets calendar edits appear without exposing Google credentials to visitors.
+The Worker allows browser requests from `https://jackiekariuki.ca`. If the site uses another production origin, update `EVENTS_ALLOWED_ORIGIN` in `wrangler.jsonc` and redeploy.
+
+## Event Details
+
+The Worker returns up to 250 upcoming events within the next 180 days and allows a five-minute cache. It expands recurring events and preserves all-day dates, times, locations, descriptions, and event links where available. The site recognizes workshops when “workshop” appears in an event title or description, or in its categories.
+
+The current Events page still uses `/api/events` until the deployed Worker URL is added to `events.html`. Do not commit the iCal secret while making that change.

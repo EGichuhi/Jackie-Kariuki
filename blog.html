@@ -48,8 +48,9 @@
     <section class="blog-page">
       <div class="container">
         <div class="blog-header text-center">
+          <span class="stories-kicker"><span></span> Notes from the community</span>
           <h1>Stories & Voices</h1>
-          <p>Articles, updates, and notes.</p>
+          <p>Ideas, celebrations, and moments worth sharing.</p>
         </div>
 
         <div id="blog-state" class="blog-state">Loading posts…</div>
@@ -104,23 +105,41 @@
       return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
+    function getSummary(post) {
+      const summary = String(post.summary || '').trim();
+      if (summary && summary !== '|-' && summary !== '-|') return summary;
+      return String(post.body || '')
+        .replace(/^\s*#{1,6}\s+/gm, '')
+        .replace(/[*_`>#-]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 190);
+    }
+
     function renderPosts(posts) {
       if (!posts.length) {
         state.textContent = 'No posts yet. Check back soon.';
         return;
       }
       state.style.display = 'none';
-      list.innerHTML = posts.map((p) => `
-        <div class="col-md-6 col-lg-4">
-          <article class="post-card">
-            ${p.thumbnail ? `<img class="post-thumb" src="${escapeHtml(p.thumbnail)}" alt="">` : ''}
-            <div class="post-date">${escapeHtml(formatDate(p.date))}</div>
-            <h2><a href="post.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a></h2>
-            <p class="post-summary">${escapeHtml(p.summary || '')}</p>
-            <a class="read-more" href="post.html?slug=${encodeURIComponent(p.slug)}">Read more →</a>
-          </article>
-        </div>
-      `).join('');
+      list.innerHTML = posts.map((p, index) => {
+        const link = `post.html?slug=${encodeURIComponent(p.slug)}`;
+        const featured = index === 0;
+        return `
+          <div class="${featured ? 'col-12' : 'col-md-6'} story-column${featured ? ' is-featured' : ''}">
+            <article class="post-card${featured ? ' story-feature' : ' story-tile'}">
+              ${p.thumbnail ? `<a class="story-image" href="${link}" tabindex="-1" aria-hidden="true"><img class="post-thumb" src="${escapeHtml(p.thumbnail)}" alt=""></a>` : ''}
+              <div class="story-copy">
+                <div class="post-date">${escapeHtml(formatDate(p.date))}</div>
+                <h2><a href="${link}">${escapeHtml(p.title)}</a></h2>
+                <p class="post-summary">${escapeHtml(getSummary(p))}</p>
+                <a class="read-more" href="${link}">Read story <span aria-hidden="true">↗</span></a>
+              </div>
+              <span class="story-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span>
+            </article>
+          </div>
+        `;
+      }).join('');
     }
 
     fetch('/blog/posts.json')
