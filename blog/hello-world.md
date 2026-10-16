@@ -1,7 +1,7 @@
 ---
-title: Celebrating Strength, Community, and Sisterhood – International Women’s Day
+title: 2026 International Women’s Day
 date: 2026-04-30
-summary: A heartfelt celebration of International Women’s Day with the Kenyan community in Toronto, filled with connection, joy, and inspiration. A beautiful reminder of the strength and unity of the women who continue to uplift and shape our community. 💛
+summary: A heartfelt celebration of International Women’s Day with the Kenyan community in Toronto, filled with connection, joy, and inspiration. A beautiful reminder of the strength and unity of the women who continue to uplift and shape our community. Celebrating Strength, Community, and Sisterhood.💛
 thumbnail: /assets/img/blog/WhatsApp Image 2026-04-24 at 21.46.50 (2).jpeg
 ---
 
