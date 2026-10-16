@@ -984,13 +984,6 @@
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    function formatDate(value) {
-      if (!value) return '';
-      const d = new Date(value);
-      if (Number.isNaN(d.getTime())) return value;
-      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-    }
-
     function renderPosts(posts) {
       if (!posts.length) {
         state.textContent = 'No posts yet. Check back soon.';
@@ -1008,12 +1001,7 @@
         <div class="swiper-slide">
           <article class="post-card">
             ${p.thumbnail ? `<img class="post-thumb" src="${escapeHtml(p.thumbnail)}" alt="">` : ''}
-            <div class="post-body">
-              <div class="post-date">${escapeHtml(formatDate(p.date))}</div>
-              <h3><a href="post.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a></h3>
-              <p class="post-summary">${escapeHtml(p.summary || '')}</p>
-              <a class="read-more" href="post.html?slug=${encodeURIComponent(p.slug)}">Read more →</a>
-            </div>
+            <h3><a href="post.html?slug=${encodeURIComponent(p.slug)}">${escapeHtml(p.title)}</a></h3>
           </article>
         </div>
       `).join('');
@@ -1024,8 +1012,8 @@
       new Swiper('.stories-swiper', {
         loop: true,
         speed: 9000,                 // slower, calmer drift
-        spaceBetween: 40,            // gap between stories
-        slidesPerView: 1.1,
+        spaceBetween: 16,
+        slidesPerView: 1.2,
         allowTouchMove: true,
         autoplay: {
           delay: 0,
@@ -1033,8 +1021,8 @@
           pauseOnMouseEnter: true
         },
         breakpoints: {
-          640:  { slidesPerView: 2, spaceBetween: 32 },
-          1024: { slidesPerView: 3, spaceBetween: 40 }
+          640:  { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 24 }
         }
       });
     }

@@ -1940,98 +1940,59 @@ section,
   }
 }
 
-.latest-stories { padding: 90px 0; }
+.latest-stories { padding: 56px 0; }
 
-  /* Extra padding inside the swiper so card shadows and hover lift aren't clipped */
-  .stories-swiper {
-    padding: 24px 20px 48px;
-    margin: 0 -20px;
-  }
-  .stories-swiper .swiper-wrapper { transition-timing-function: linear !important; }
-  .stories-swiper .swiper-slide { height: auto; }
+.stories-swiper {
+  padding: 8px 2px 16px;
+}
+.stories-swiper .swiper-wrapper { transition-timing-function: linear !important; }
+.stories-swiper .swiper-slide { height: auto; }
 
-  .post-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: var(--surface-color, #fff);
-    border: 1px solid rgba(0, 0, 0, .06);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
-    transition: transform .35s ease, box-shadow .35s ease;
-  }
-  .post-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 44px rgba(0, 0, 0, .12);
-  }
+.latest-stories .post-card {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px;
+  background: var(--surface-color, #fff);
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 8px;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+.latest-stories .post-card:hover {
+  border-color: var(--accent-color, #666);
+}
 
-  .post-card .post-thumb {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    display: block;
-    transition: transform .6s ease;
-  }
-  .post-card:hover .post-thumb { transform: scale(1.04); }
+.latest-stories .post-card .post-thumb {
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  border-radius: 5px;
+  object-fit: cover;
+}
 
-  .post-card .post-body {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 28px 28px 32px;
-  }
-
-  .post-card .post-date {
-    align-self: flex-start;
-    font-size: .75rem;
-    font-weight: 600;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--accent-color, #666);
-    background: color-mix(in srgb, var(--accent-color, #888) 12%, transparent);
-    padding: 6px 12px;
-    border-radius: 50px;
-    margin-bottom: 16px;
-  }
-
-  .post-card h3 {
-    font-size: 1.3rem;
-    line-height: 1.35;
-    margin: 0 0 14px;
-  }
-  .post-card h3 a {
-    color: var(--heading-color, inherit);
-    text-decoration: none;
-  }
-  .post-card h3 a:hover { color: var(--accent-color, inherit); }
-
-  .post-card .post-summary {
-    font-size: .95rem;
-    line-height: 1.7;
-    opacity: .8;
-    margin: 0 0 24px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .post-card .read-more {
-    margin-top: auto;
-    font-weight: 600;
-    font-size: .95rem;
-    text-decoration: none;
-    color: var(--accent-color, inherit);
-  }
-  .post-card .read-more:hover { text-decoration: underline; }
+.latest-stories .post-card h3 {
+  min-width: 0;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+.latest-stories .post-card h3 a {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--heading-color, inherit);
+  text-decoration: none;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.latest-stories .post-card h3 a:hover { color: var(--accent-color, inherit); }
 
   .latest-stories .btn { padding: 12px 32px; }
   .latest-stories .text-center.mt-4 { margin-top: 24px !important; }
 
   @media (max-width: 575px) {
-    .latest-stories { padding: 60px 0; }
-    .post-card .post-body { padding: 22px 22px 26px; }
+    .latest-stories { padding: 40px 0; }
   }
 
 
